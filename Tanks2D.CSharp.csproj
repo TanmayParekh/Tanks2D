@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\scripts\TankMove.cs" />
+    <Compile Include="Assets\scripts\TankProp.cs" />
     <Compile Include="Assets\scripts\TankShoot.cs" />
     <Compile Include="Assets\scripts\bulletController.cs" />
   </ItemGroup>
