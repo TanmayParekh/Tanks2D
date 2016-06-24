@@ -10,7 +10,6 @@ public class TankProp : MonoBehaviour {
 
     private float actualHealth;
     private Scrollbar healthBar;
-    private float tankAngle;
 
 	// Use this for initialization
 	void Start () {
@@ -32,20 +31,42 @@ public class TankProp : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        // If the colliding gameobject is not the tank firing it, then destroy bullet.
-        // Add damage to the colliding tank and make change in health bar.
-        if (coll.gameObject.GetComponent<bulletController>().parent.name != gameObject.name)            // Only checks bullet and tank collision. Might need to make it modular.
-        {
-            Debug.Log(coll.gameObject.GetComponent<bulletController>().parent.name + ' ' + gameObject.name);
-            float bulletDamage = coll.gameObject.GetComponent<bulletController>().damage;
-            actualHealth -= bulletDamage;
-            healthBar.size = Mathf.Max(actualHealth / maxHealth,0f);
 
-            if (actualHealth <= 0)
-            {
-                Destroy(gameObject);
-            }
+        if (coll.gameObject.tag == "Tank")              // Collision with tank.
+        {
+            // Code for damage to tanks.
         }
+
+        else if (coll.gameObject.tag == "Bullet")       // Collision with bullet
+        {
+            
+            // If the colliding bullet is not the tank firing it, then destroy bullet and take damage equal to that of bullet.
+            if (coll.gameObject.GetComponent<bulletController>().parent.name != gameObject.name)
+            {
+
+                float bulletDamage = coll.gameObject.GetComponent<bulletController>().damage;
+                actualHealth -= bulletDamage;
+                healthBar.size = Mathf.Max(actualHealth / maxHealth, 0f);
+
+                // If tank's health <= 0, Kill tank
+                if (actualHealth <= 0)
+                {
+                    Destroy(gameObject);
+                }
+
+            }
+            // If the colliding bullet is of tank firing it, destory bullet. No damage to tank.
+            else
+            {
+                // Bullet is destroyed on it's own. It's bullet's property.
+            }
+
+        }
+        else if (coll.gameObject.tag == "Wall")   // Collision with Walls
+        {
+            // Do nothing if collision with walls
+        }
+
     }
 
     // Update is called once per frame

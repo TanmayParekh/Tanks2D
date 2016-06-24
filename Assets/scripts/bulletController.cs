@@ -18,12 +18,30 @@ public class bulletController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        // If the colliding gameobject is not the tank firing it, then destroy bullet.
-        // We can add damage to the colliding tank here.
-        if (coll.gameObject.name != parent.name)
+        // Destroy the bullet if it collides with any tank (other than the one firing), wall or another bullet.
+
+        if (coll.gameObject.tag == "Tank")                  // Collision with tank
+        {
+            if (coll.gameObject.name != parent.name)        // If not parent tank, destroy bullet. 
+            {
+                Destroy(gameObject);
+            }
+            else                                            // If parent tank, don't destory
+            {
+
+            }
+        }
+        else if (coll.gameObject.tag == "Bullet")           // Collision with bullet
+        {
+            if (coll.gameObject.GetComponent<bulletController>().parent.name != parent.name)
+            {
+                Destroy(gameObject);
+            } 
+        }
+        else if (coll.gameObject.tag == "Wall")             // Collision with wall
         {
             Destroy(gameObject);
-        }       
+        }      
     }
 
     // Update is called once per frame

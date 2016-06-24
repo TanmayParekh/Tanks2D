@@ -37,7 +37,7 @@ public class TankShoot : MonoBehaviour {
             // Properties of the bullet. Can be changed to make better gameplay.
             bullet.GetComponent<bulletController>().parent = gameObject;
             bullet.GetComponent<bulletController>().damage = 5.0f;
-            bullet.GetComponent<bulletController>().radius = 0.38f;
+            bullet.GetComponent<bulletController>().radius = 0.18f;
 
             // Update the the next time available for a fire.
             nextFireTime = Time.time + fireRate;
