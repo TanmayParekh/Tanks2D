@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class TankShoot : MonoBehaviour {
+public class TankShoot : NetworkBehaviour {
 
     public GameObject bulletPrefab;             // The bullet to be fired from the tank
     public float bulletVelocity = 5f;           // Velocity with which bullet leaves the tank
@@ -18,6 +19,7 @@ public class TankShoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (!isLocalPlayer) return;
 
         if (Input.GetKey(KeyCode.Space) && Time.time >= nextFireTime)
         {

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class TankProp : MonoBehaviour {
+public class TankProp : NetworkBehaviour {
 
     public float maxHealth = 100f;
     public GameObject health;
@@ -13,7 +14,11 @@ public class TankProp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+    
         healthBar = health.GetComponentInChildren<Scrollbar>();
     
         // Don't rotate HealthBar with tank. Keep the rotation zero.

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class TankMove : MonoBehaviour {
+public class TankMove : NetworkBehaviour {
 
     public float speed = 1.0f;          // Speed at which the tank moves.
 
@@ -12,8 +13,7 @@ public class TankMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
+        if (!isLocalPlayer) return;
         // WASD Movement
         if (Input.GetKey(KeyCode.A))
         {
