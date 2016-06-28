@@ -10,10 +10,17 @@ public class TankMove : NetworkBehaviour {
 	void Start () {
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    public override void OnStartLocalPlayer()
+    {
+        GetComponent<MeshRenderer>().material.color = Color.red;
+    }
+
+    // Update is called once per frame
+    void Update () {
+
         if (!isLocalPlayer) return;
+       
         // WASD Movement
         if (Input.GetKey(KeyCode.A))
         {
